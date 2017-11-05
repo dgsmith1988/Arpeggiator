@@ -1,0 +1,201 @@
+{
+	"pattrstorage" : 	{
+		"name" : "tonalityScenarios",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"A_delay" : [ 0 ],
+					"A_dur" : [ 100 ],
+					"A_note" : [ 18 ],
+					"A_vel" : [ 127 ],
+					"E_delay" : [ 0 ],
+					"E_dur" : [ 100 ],
+					"E_note" : [ 14 ],
+					"E_vel" : [ 127 ],
+					"RootNote" : [ 2 ]
+				}
+
+			}
+,
+			"2" : 			{
+				"id" : 2,
+				"data" : 				{
+					"A_delay" : [ 0 ],
+					"A_dur" : [ 100 ],
+					"A_note" : [ 25 ],
+					"A_vel" : [ 127 ],
+					"E_delay" : [ 0 ],
+					"E_dur" : [ 100 ],
+					"E_note" : [ 16 ],
+					"E_vel" : [ 127 ],
+					"RootNote" : [ 4 ]
+				}
+
+			}
+,
+			"3" : 			{
+				"id" : 3,
+				"data" : 				{
+					"A_delay" : [ 0 ],
+					"A_dur" : [ 100 ],
+					"A_note" : [ 18 ],
+					"A_vel" : [ 127 ],
+					"E_delay" : [ 0 ],
+					"E_dur" : [ 100 ],
+					"E_note" : [ 17 ],
+					"E_vel" : [ 127 ],
+					"RootNote" : [ 5 ]
+				}
+
+			}
+,
+			"4" : 			{
+				"id" : 4,
+				"data" : 				{
+					"A_delay" : [ 0 ],
+					"A_dur" : [ 100 ],
+					"A_note" : [ 23 ],
+					"A_vel" : [ 127 ],
+					"E_delay" : [ 0 ],
+					"E_dur" : [ 100 ],
+					"E_note" : [ 17 ],
+					"E_vel" : [ 127 ],
+					"RootNote" : [ 5 ]
+				}
+
+			}
+,
+			"5" : 			{
+				"id" : 5,
+				"data" : 				{
+					"A_delay" : [ 0 ],
+					"A_dur" : [ 100 ],
+					"A_note" : [ 28 ],
+					"A_vel" : [ 127 ],
+					"E_delay" : [ 0 ],
+					"E_dur" : [ 100 ],
+					"E_note" : [ 22 ],
+					"E_vel" : [ 127 ],
+					"RootNote" : [ 6 ]
+				}
+
+			}
+,
+			"6" : 			{
+				"id" : 6,
+				"data" : 				{
+					"A_delay" : [ 0 ],
+					"A_dur" : [ 100 ],
+					"A_note" : [ 22 ],
+					"A_vel" : [ 127 ],
+					"E_delay" : [ 0 ],
+					"E_dur" : [ 100 ],
+					"E_note" : [ 19 ],
+					"E_vel" : [ 127 ],
+					"RootNote" : [ 7 ]
+				}
+
+			}
+,
+			"7" : 			{
+				"id" : 7,
+				"data" : 				{
+					"A_delay" : [ 0 ],
+					"A_dur" : [ 100 ],
+					"A_note" : [ 25 ],
+					"A_vel" : [ 127 ],
+					"E_delay" : [ 0 ],
+					"E_dur" : [ 100 ],
+					"E_note" : [ 22 ],
+					"E_vel" : [ 127 ],
+					"RootNote" : [ 7 ]
+				}
+
+			}
+,
+			"8" : 			{
+				"id" : 8,
+				"data" : 				{
+					"A_delay" : [ 0 ],
+					"A_dur" : [ 100 ],
+					"A_note" : [ 30 ],
+					"A_vel" : [ 127 ],
+					"E_delay" : [ 0 ],
+					"E_dur" : [ 100 ],
+					"E_note" : [ 23 ],
+					"E_vel" : [ 127 ],
+					"RootNote" : [ 9 ]
+				}
+
+			}
+,
+			"9" : 			{
+				"id" : 9,
+				"data" : 				{
+					"A_delay" : [ 250 ],
+					"A_dur" : [ 100 ],
+					"A_note" : [ 18 ],
+					"A_vel" : [ 127 ],
+					"E_delay" : [ 0 ],
+					"E_dur" : [ 100 ],
+					"E_note" : [ 14 ],
+					"E_vel" : [ 127 ],
+					"RootNote" : [ 2 ]
+				}
+
+			}
+,
+			"10" : 			{
+				"id" : 10,
+				"data" : 				{
+					"A_delay" : [ 0 ],
+					"A_dur" : [ 100 ],
+					"A_note" : [ 18 ],
+					"A_vel" : [ 127 ],
+					"E_delay" : [ 250 ],
+					"E_dur" : [ 100 ],
+					"E_note" : [ 14 ],
+					"E_vel" : [ 127 ],
+					"RootNote" : [ 2 ]
+				}
+
+			}
+,
+			"11" : 			{
+				"id" : 11,
+				"data" : 				{
+					"A_delay" : [ 50 ],
+					"A_dur" : [ 100 ],
+					"A_note" : [ 18 ],
+					"A_vel" : [ 127 ],
+					"E_delay" : [ 0 ],
+					"E_dur" : [ 100 ],
+					"E_note" : [ 14 ],
+					"E_vel" : [ 127 ],
+					"RootNote" : [ 2 ]
+				}
+
+			}
+,
+			"12" : 			{
+				"id" : 12,
+				"data" : 				{
+					"A_delay" : [ 0 ],
+					"A_dur" : [ 100 ],
+					"A_note" : [ 25 ],
+					"A_vel" : [ 127 ],
+					"E_delay" : [ 50 ],
+					"E_dur" : [ 100 ],
+					"E_note" : [ 16 ],
+					"E_vel" : [ 127 ],
+					"RootNote" : [ 4 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}

@@ -1,0 +1,553 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf460
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{lower-alpha\}.}{\leveltext\leveltemplateid102\'02\'01.;}{\levelnumbers\'01;}\fi-360\li1440\lin1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{lower-roman\}.}{\leveltext\leveltemplateid103\'02\'02.;}{\levelnumbers\'01;}\fi-360\li2160\lin2160 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Thoughts for Ben\'92s arpeggiation patch:\
+\
+Two separate parts, one for handling midi note generation and the other for sound synthesis\
+\
+Midi generation-\
+Have a \'93key\'94 with which everything is based around - does it matter what\
+midi note value this is? that could affect the pitches of everything else. Create\
+a \'93chord voicing\'94 object of which there are 7. A midi note comes in and gets \
+\'93filtered\'94 (i.e. checks whether it\'92s in key or not and changes key if necessary).\
+Then the voicing is triggered.\
+\
+What\'92s in a voicing? Eight notes? Four notes? Control what order they come in?\
+Synching with tempo or just normal delay? Apply voice leading?\
+\
+How to enforce/know what\'92s in key or not? What are the range of values for midi notes?\
+Take whatever comes in and modulo 12 it to put it in the range 0-12? How to figure out\
+scale degree?\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul \ulc0 06/08/2014\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone Incorporating randomness seems to be difficult to control (go figure\'85 it is randomness) but it\
+has led to several other ideas (partially inspired by an idea Quarles had mentioned at one point).\
+Randomness can also be applied to other things in this patch beyond the delay amount (i.e. the\
+note selection). When applied to note selection to create \'93note clusters\'94 something might need to be\
+added to repeat the notes (and maybe control their duration\'85). It could also be interesting to\
+parametrize the \'93note clusters\'94 and add some way so Ben could control these more effectively,\
+look at what other information the MIDI pickup outputs, maybe use \'93bending\'94 as a way to control\
+the clusters\'85\
+\
+Look into what can be done with MIDI channels. Ben originally did ask for something that \'93swelled\'94 the notes of the harmony in. If you\'92re only dealing with one MIDI instrument this might be more feasible. Each chord tone could be associated with a specific channel and then you could control\
+the volume of the chord tones more easily. You might need to get a more complex MIDI instrument\
+to be testing with, MIDI keys is too simple, it will be important to understand how other MIDI systems\
+or instruments would interact with this patch. There is still also the possibility of using velocity to \
+control the volume but that also changes how the MIDI instruments will respond. In general your\
+understanding of MIDI instruments/systems could be improved. Also, create a better system for keeping track of the different versions of what you\'92re doing so you don\'92t wreck one entirely and then have nothing to show him when he arrives on Friday.\
+\
+Note clusters are interesting as they could be applied both horizontally (in terms of rhythm) or vertically (in terms of harmony). It might be worth looking more into this to understand the different types of randomness/noise that can be created (I believe the different \'93colors\'94 of noise generally relate to randomness with different properties). Probability could also be used, maybe make it so you\'92re more likely to get consonant harmonies with more dissonant ones being generated less frequently.\
+\
+Your brain seems to have two different modes, the planning mode and the attack mode. In planning mode you\'92re much more receptive to new information and building mental systems of things, it also tends to be where new ideas come from. In attack mode you\'92re determined to achieve something and few things tend to stand in your way, it also tends to get obsessive and works best in 1-2 hour chunks. You should become more aware of when you\'92re getting obsessed and not accomplishing anything so you don\'92t waste time. Time off isn\'92t necessarily bad as it allows you to process the events and form new ideas.\
+\
+Goal for end of the day: Get a basic patch working to have a baseline and then create other larger patches that incorporate the smaller patches and represent different ideas (different ways of controlling randomness). Use different directories to create the patches so you can modify the subcomponents if necessary (i.e. unpack and add or arpeggio), then at the end you will have several concrete ideas and it will be more clear how to generalize and merge them.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 06/30/2014\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone So it turns out Ben could run the Live version of Max for free. There\'92s also a way to create Max standalones for the patches and if I could figure that out then he wouldn\'92t need to install anything extra. There\'92s also a presentation mode that allows you to clean things up a lot in terms of the UI exposed.This should definitely be investigated. What would make sense to have available in presentation mode? What information would be useful? \
+- The key your in, as well as the most recent chord\
+- Something to set/synchronize the tempo\
+- Selecting the source for MIDI input\
+- Randomness mode/parameters - this is more delay selection\
+- Enabling the swell? Along with the swell adjusting the volume envelope?\
+- Adjusting the MIDI channels for each of the chord tones?\
+- Can the layout change depending on what you select? (i.e. different parameters would be available to adjust depending on what you select as the delay source)\
+- Have delay source selectable on a chord tone basis?\
+- Routing the same randomness source instantiations to different chord tones? Don\'92t display a matrix for this but instead have a way to select which other chord tone to synchronize with.\
+-Incorporate different presets and the ability to store them\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 07/12/2014\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone It\'92s probably better to get all the individual components/features working first before assembling everything into a finalized path with a GUI. Objectives for today:\
+- Establish feasibility of applying volume swells to the different chord tones by assigning each one to  different MIDI channel. If this route is taken what are its limitations? You would have to wait until a note is done playing before triggering another one or else the volume swell would be restarted and applied to both - this might be interesting in itself.\
+- Establish tempo synchronization. At this point it\'92s probably easier to just do it without synchronizing it to all the external systems as well and just convert the note values into ms values for delay blocks to utilize. Is there a way a tap tempo feature could be added? Think about how one might be able to achieve this. Maybe have Ben hit the spacebar and then play two successive notes?\
+- If we used more \'93musical\'94 (i.e. rhythmic values) for the delay amounts is there a way to added randomness to this? For example everything is delayed in 16th notes but the order the chord tones are played is determined randomly. Could mixing different rhythmic values provide more interesting results? Maybe polyrhythmic patterns? Maybe the octave versions of chord tones could by synchronized (or not)? This might have interesting effects on the tonality (assuming the diatonic arpeggios are of a complex enough tonality).\
+\
+Convert ms/beat to beats per minute\
+\
+280 ms/beat * 1 sec / 1000 ms * 1 min/60 sec\
+\
+Should it be modified to ramp up to the received velocity value? In this case since we\'92re dealing with channel control messages were directly affecting the channel volume, not the note velocity.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 07/14/2014\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone What are the ramifications of adding the volume swell on the different MIDI channels individually?\
+We might interfere with other pre-existing MIDI systems, maybe selected an obscure or very high\
+port number might be the best idea in order to keep them isolated. There\'92s really no way of telling\
+what else might be impacted since the MIDI control messages are affecting the general MIDI system\
+(from my knowledge, it might be worth investigating more about MIDI just to make sure). It\'92s really getting to the point where it would be useful to understand more about the system I\'92d be integrating with in order to fully understand it and make better decisions. Do we add an offset to whatever the incoming channel number is? If we assign the output to a specific MIDI port just for this patch then it won\'92t really matter. What about if we just remap (and hardcode the remapping) of whatever comes in to specifically channels 1-8? That might work, but what if notes are coming in on different channels? We\'92d effectively be undoing their assignment\'85though titty for those notes, it\'92s just something that comes with the territory in this case. It still might be worth knowing what Ben has his pickup configured to. There\'92s also the possibility that we apply filtering based on the incoming MIDI channel.\
+We can then remap those to a different port.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 07/17/2014\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone What to do for the envelope generator? How to trigger them? Based solely on the channel number of the incoming MIDI note message? What if an it\'92s an off message? It would be pointless to trigger then envelope in that case and it might be unexpected. Make sure to filter those out. What should happen after the envelope finishes? It should stay high as from the standpoint of the envelope generator it will be unknown as to whether the note is still playing or not. Should there be a min and max value? Otherwise it will always go to the maximum MIDI channel value. Max would definitely be useful, min maybe not so much, add them and see what Ben says.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 07/18/2014\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone What would be the best way to do the randomness/delay part? I think it would be a good idea to enable/disable these parts, maybe even enabling/disabling specific chord tones in general. I think the best way to go about this would be to use a bpatcher and link it to another sub-patcher which contains the display and uses the send/receive objects to communicate with the patcher that contains the actual logic. How to do this though? Should each delay mode contain it\'92s own set of parameters? Should each delay mode have a matrix control or just the random ones? What are the delay modes in general?\
+\
+- Pure randomness\
+- Drunken randomness\
+- Manual delay in ms (w/ option to set spacing as multiples of the first one)\
+- Delay based on rhythmic values (with maybe eventual random selection of rhythmic values)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 07/21/2014\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone What is the best way to be able to set the manual delay? If we always have the final delays displayed it could be as simple as adding dials or controls to be able to adjust those boxes. Also have the base value visible and adjustable. Basically remove the affect of the bang on each incoming note so you can either set it from the cascaded base delay box or manually adjust them.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 11/26/2014\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone So it seems easy enough to get the pitch bend data out form the Triple Play setup. The only problem might be holding the chord and bending it over a long period of time. If the string is hit again the TP might recognize that as that start of a new note and undo the bending as well as latch on to the note associated with the new \'93attack\'94. It might be possible to mitigate this using other MIDI control messages, this should be investigated further. It might also be possible to mitigate it using an EBow or sustained type of device to allow for infinite sustain, or an expression pedal might be able to be used to control the note \'93latching\'94 as well as preserve the continuity/values of the bend value somehow. There might need to be some sort of an offset or used as it\'92s most likely that the TP itself provides the bend value based on what it recognizes the \'93initial\'94 note to be. Also how could the different channels for each string be used (or maybe it\'92s a problem)? Each string might have a different way of interacting with the chord somehow? That might get kind of complicated to begin with. Focusing on just getting it to work with one channel/string for now (or at least treating them all the same way). It didn\'92t really seem like the pitch bend \'93calibration\'94 thing in the TriplePlay software did much. What does the \'93Bend Range\'94 actually do? The manual makes it seem like it controls how the TP software interprets bend messages from the HW and uses them to control whatever the different \'93synths\'94 you have loaded do. It might also be possible to create a VST \'93plugin/instrument\'94 that\'92s can be loaded into the TriplePlay software itself, that way the \'93preprocessing\'94 the TPSW does could be taken advantage of. I wonder if there\'92s an easy way to convert a Max patch to be interpreted as a VST instrument or something\'85hmmm\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 12/22/2014\ulnone \
+What to do next? Rage checking? Explore the rhythmic possibilities? What about note off messages? Do they apply to the entire channel or just specific note numbers? Just specific note numbers\'85Will these be generated by the triple play device or will some management need to be done on my part?\
+\
+How to implement rhythmic modifications? Have a general global tempo tracker (built-in to Max/MSP) to coordinate everything within a measure or have it based on the millisecond equivalent of that rhythm? What exactly will the signal be controlling at this point?\
+\
+A few different possibilities\'85\
+ - Make the delay time proportional to the bend value (do we want delay time here or would \'93triggering moment\'94 be more appropriate)? Would this really be delay time or would duration be more appropriate? Could the bend value just adjust the tempo? In this case there\'92s no real \'93triggering\'94 so to speak, i.e. I\'92m not sure how much sense it would make to have the same \'93threshold\'94 idea from before apply. The ideas could be combined but it\'92s probably easier to use a \'93static\'94 arpeggio first\'85\
+\
+What to do next? Try making a static arpeggio (i.e. where the number of notes don\'92t vary corresponding to the control signal) and use the control signal to change the rate of arpeggiation.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\i \cf0 Static Arpeggiation Work
+\i0 \
+How to trigger the other notes? How is the arpeggiator activated? Start the arpeggiation pattern when note on is received and then stop when note off is received? Should the notes ring out or stop once the next note starts (or maybe have the option of selecting between the two)?\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 12/23/2014\ulnone \
+Two events are necessary, the start of a note and said note\'85hmm we could potentially change when the note off message is sent to create an overlapping/cascading effect, different rhythms might be useful here. Better not make it too complicated here\'85hmm, the bending could also change the overlap times and durations\'85Just worry about making them adjacent for now and perhaps explore this idea further later\'85\
+How to control the direction of the arpeggiation (i.e only up, only down, or alternating)? Use a counter to direct which note is triggered next, this also allows for a center of control for issuing the \'93notes\'94.\
+\
+\ul 12/24/2014\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone How to setup and send bangs using sub patches? The send and receive objects will need to be used\'85MIDI data comes in and sets the buffers\'85after the buffers are set how do we trigger the new message being sent? Send a bang back up to the bang that triggers the counter which can then send a bang to trigger the calculations and the message generation\'85What about if we have multiple objects which each send a bang out, how do we ensure that only one bang triggers the sending? I think we have a synchronization problem similar to threading\'85Should we only deal with one at a time then?\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 03/15/2015\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone Several new possibilities have come up during the merge of the \'93voicing shape\'94 as well as the rate adjustment\'85 Most notably how exactly to coordinate what notes are being generated with the \'93control signal\'94. Where do we cut off the notes? If we do it inside the NoteOnGenerators then the lack of a bang might mess the rest of the system triggering up. It might be better to do it outside of them and change the routing before the bang is sent in\'85 now when we do this do we leave a blank space or dynamically adjust the rest of the counters so everything occurs \'93adjacently\'94 with no gap in between. I think this would be easier from a C++ perspective as you could do this easily with a linked-list type structure probably. It would also allow for a much more granular level of control over the timing\'85Developing a GUI would be a bitch though\'85 Also, think about a way to limit the number of bangs cycling through the system\'85maybe cut it off at the note-on point\'85? Or have some sort of timing counter keeping track of when they go through\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 03/16/2015\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone So the issue of selecting which  notes are enabled by the \'93bend\'94 signal is becoming more apparent\'85I\'92m not sure how exactly to fix it. What do we want it to do? For now it might be easier to have a predefined/linear order of how the notes are added/removed. Also\'85how to deal with a static number of notes by a dynamic voicing? I guess the best way would be to trigger them all at once\'85 maybe\'85 but then after you bend to the point of changing the voicing do you trigger all the notes again\'85 or maybe only the notes that have moved should be retrigggered\'85this might also be factor depending on what the sound being triggered is. What about making the rhythmic values adjust to fill the space for the. What about some sort of a system where then the control signal goes past the threshold it triggers flag in an external system, this system then keeps track of which notes are triggered/how many notes are triggered and adjusts the necessary counters to adapt\'85the bangs/values from the counter and then sent to another system which is dynamically adjusted to route the bangs to trigger the correct notes\'85.maybe a matrix of sorts\'85the matrixctrl object doesn\'92t seem useful by itself..perhaps in conjunction with a router? a router might be exactly what\'92s necessary\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 03/26/2015\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone What are some other things i could add to the patch? There\'92s the ability redefine the length of the time in between the notes based on how many notes are active. There\'92s the ability to add \'93space\'94 to where the removed notes are (so the arpeggio would be filled in a bit differently). Maybe add the ability to change the rhythmic patterns for each note (coordinate the delay amount with main event counter). Also need to add some sort of sensitivity/scaling parameter and configure the ability to take input from the Triple Play\'85 Also it would be cool if the notes changed/followed some sort of voice leading path with the bend signal\'85 Also it would be cool to incorporate the diatonic patch into this as well\'85and make the voice leading coincide to stay within diatonic tones for whatever key your in\'85hmm\'85 probably in the long term this would be good\'85\
+\
+Is there any way to coordinate this with tempo somehow? Instead of using arbitrary values use different rhythmic values and divide the length of a beat by that? That\'92s actually something more worth pursuing I think\'85\
+\
+Next point of focus will be getting the Triple Play input working. Then work on getting the tempo synchronization going as well as \'93adding\'94 space to the arpeggios. Then maybe get the \'93voice leading\'94 aspect. What would be cool is if you could use the threshold to trigger the notes then then after they\'92re all triggered and the chord is built up then notes can shift around\'85 hmmm\'85. Focus on this idea for awhile\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 05/09/2015\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone What to do when switching tonalities? Start playing the chord based on that scale degree within the new tonality\'85Solved\'85ordering issue related to object placement. Why do we get an extra note in the beginning on the first chord? Because the pitch synch was sending a a bang that conflicted with the counter from the \'93event counter\'94. What next? What about selecting which note the arpeggio starts on? Having it be continuous would probably be best\'85either always on the bottom or always on top..what about when it goes up and down? have a way to select it? how to define when to reset the counter? when the Note Off comes in from\'85.come back to this\'85 how to ensure the the chord tones and offsets are updated before any of the notes are sent out\'85? create a new send object?\
+\
+The basic framework seems to be in place (although I could add a feature where the \'93space\'94 is combined with the routing feature to create space in other parts of the arpeggio\'85this idea could really be expanded upon in terms of creating different rhythmic patterns\'85). The next part will really be tackling the control signal scaling/sensitivity and using it to control the different parameters\'85.what about the voice leading aspect? The dynamic chord voicing aspect might be hard to do now given that we\'92re using the \'93modality\'94 library\'85 or maybe not as it gives you the notes as well as the scale structure\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 05/10/2105\ulnone \
+What\'92s the best way to handle this bend signal? What are the properties of it? 14 bit value- this is an even number of states but there\'92s one less state when dealing with upward pitch-bends\'85 Does that really matter here? Not for now\'85 it might affect the mappings slightly but the basic idea is the same (remember to look into he exact values afterwards\'85). \
+\
+Work without the Triple Play first\'85 figure out a clean way of controlling the different parameters first (use a slider to send the values) and combining how they affect things (i.e. just pitch or just rhythm or both and then different combinations of inverting them). Then figure out the best way to handle combining the Triple Play in the mix (maybe changing the mappings to be slightly exponential to feel more \'93natural\'94)\'85. also don\'92t forget about rhythmic idea (which just completely left your mind for whatever reason\'85). It will probably be worth it to create a \'93Triple Play\'94 simulator for testing/debugging purposes\'85. It would basically be a way to send note on/note off messages more strategically\'85\
+\
+Brain storming for the simulator: what does it need to do? repeatedly send notes while at the same time allowing the bend signal to be modified. \
+\
+Hmm\'85 this makenote tool could prove to be useful in revamping the arpeggiator\'85 but it might also eliminate some of the other features\'85\
+\
+Also look into using this NSlider as a possible input device. It seems much more musically appropriate/intuitive.\
+\
+How to handle a bend up vs a bend down? Maybe set some sort of a \'93biasing point\'94 on the parameter being controlled\'85 have this be movable\'85 this would basically enforce a maximum/minimum for either direction\'85 hmm at what point to do this and would this be desirable or not?\
+\
+\ul 05/11/2015\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone There seem to be a few different places where you can impose a maximum/minimum and moving it slightly up or down the signal chain can achieve the same/similar effect. The first part in the signal chain is the vibrating string. The next part is the Fishman pickup. The parameters you can really control here are the half step bend range. This changes what maps to the MIDI bend signal. If we impose a max/min on the MIDI bend signal (or the value it\'92s mapped to) this really caps the bend prematurely\'85. Although it might be possible to use it to find microtonal notes\'85 or map microtonal values\'85 well  maybe I\'92m not sure\'85\
+\
+Altering the range of MIDI bend values that are used would affect the useful bending range (it would effectively make values outside of the range unused\'85). This would basically be useless as far as I can tell at the moment (or basically it complicates things way too much for me to consider\'85).\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 05/19/2015\ulnone \
+There seemed to be a few problems regarding tracking the bend signal although I\'92m not sure if they were from a lack of a proper setup on the guitar or what. It might also require tweaking some oft he parameters of the pickup\'85Also a filter could be created on the software level\'85 Hmm it would probably be a good thing to create some way of blocking incoming MIDI notes if there\'92s one already playing\'85 and have a way to toggle this\'85 it would improve a lot of the overall ability to control the software and it\'92s robustness.\
+\
+What\'92s the best way to achieve this? How to block them? Have a boolean? Have a gate? But then if we switch the gate and block them all how do we know when to turn it back on? We\'92ll need some sort of intermediate buffer type of pre-processing deal\'85 Inspect the MIDI message before it\'92s processed and if it\'92s not a note off message corresponding to the currently \'93playing\'94 note ignore it\'85 you might also have to factor in the channel as well\
+\
+\ul 05/20/2105\ulnone \
+What\'92s the best way to implement this filter?\
+Pseudo Code:\
+\
+if not active\
+	then incoming note  = current note\
+else if active and note off message\
+	if note off is for the current note\
+		then shut off machine\
+	else\
+		ignore incoming message\
+else if active and note on message\
+	ignore\
+\
+how to store the values and implement this in max/msp? messages vs numbers? sel vs ==? what about the channel parameter? how does that play into everything here, don\'92t forget about and and end up making a huge mistake\'85\
+\
+so you can select which MIDI port you want and on each port there are 16 channels. what if we have data coming in on multiple channels? should we really even have that in this situation? then if we do how do we coordinate that with the bend signal? don\'92t really worry too much about this now, get the basics of the arpeggiator working more robustly\'85\
+\
+\ul 05/28/2015\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone What will this filter do if we make it so it doesn\'92t accept any new values until a note off is received? It will help eliminate the duplicate problem but what if you want to retrigger a note? In this case the same note message would be coming in but the velocity would be different? do you allow it? could it \'93restart\'94 the machine? what does that even mean? for now don\'92t worry about it nd just acknowledge it as quirk of the system\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 05/30/2015\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone The current placement of the filter doesn\'92t really do anything useful\'85 It needs to be placed earlier in the chain to prevent any of the internal MIDI values used (i.e. arpeggiator roots) from being updated. Basically in between the \'93notein\'94 object and the rest of the system\'85\
+\
+Take all the inputs and pack them into a list for easier processing\'85\
+\
+Damn\'85 it works while the notes are playing but there still seems to be some sort of a timing issue related to not transitions. I\'92m not entirely sure how this part works or how all these events are ordered/processed in Max/MSP either\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 06/02/2015\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone What to do to the patch before Ben gets here? There\'92s the extra note on the transitions that needs to be debugged\'85 there\'92s also the feature of mapping the bend value to a rhythmic value associated with a BPM. How would that work exactly? There\'92s a BPM obviously but then how to the bend values get mapped? Take them and quantize them to the nearest integer division of the beat\'85 what if some are more usable than others (i.e. sixteenth notes v.s. septuplets\'85) have some way to toggle them\'85 but then if yo can toggle them how to you divide up the bend range?\
+\
+Convert beats/min to ms per beat\'85 take the reciprocal to get min/beat then multiply by 60 sec/1 min and then multiply by 1000ms/sec\
+\
+(beats/min)^-1 * (60 sec/min) * (1000 ms/min)\
+\
+How do we even want to do this? It looks like finding the nearest \'93bin\'94 that the incoming signal fits into would be a good candidate for achieving this \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 06/04/2015\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone How to figure out what subdivisions to use? This effectively sets the note duration for all the notes in the arpeggio\'85 What do they do in the Axe-FX? It\'92s not in the manual and I\'92m too lazy to go down stairs so I guess it will have to wait.\
+\
+What is the issue that I\'92m dealing with here? Do I deal with just straight easy/simple subdivisions (i.e. dividing the beat into two, three, 4, 5, 6\'85 and all that)? Probably simplest to start with that and worry about things like dotted quarter notes/creating polyrhythmic things later. Does Max/MSP already provide this functionality more easily for me? It provides the basic division by two/three values but not the prime number ones\'85 also how many notes do we do? it might be interesting to only have a two note arpeggio and then have them playing in pentuplets to create other investing cross rhythms and all that jazz\'85 i think i\'92m thinking of a different thing here\'85 right now i\'92m just looking to create \'93bins\'94 to find the nearest value that the bend controlled duration signal will be closest to.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 06/06/2015\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone How do we do the comparison to see which \'93bin\'94 is the one the duration should go in? A series of < or > comparisons chained together? We have one number and want to compare it to 8 different numbers to see which one it is closest to\'85 Perhaps someone has already done this in Max/MSP\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 06/07/2015\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone Man I\'92m getting pretty fucking sick of this\'85 I don\'92t really know why but I don\'92t want to work on this anymore\'85 I\'92ve made some progress definitely but after fixing the extra note thing when switching between notes really quickly as well as integrating the subdivision calculator further I\'92m going to take a break for a long time\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 03/31/2016\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone Well I\'92ll be damned\'85 naming things like super duper advanced arpeggiator during the development\
+process made it hard to figure out which version you were working on. Lets for now assume that the \'93super duper\'94 one is the latest and pickup development from that point. In the future you should make sure to use a more organized versioning system.\
+\
+Actually it looks like the \'93Super Duper\'94 one is in a general state of disrepair so resume from the v0.2\
+directory\'85\
+\
+I\'92ll most likely need some sort of reliable tool for generating regular midi notes at consistent intervals\'85It appears I have already done this with the \'93MIDI_Note_Tool\'94.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 04/04/2016\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone Lets work on the MIDI testing tool\'85 What do I need it to do? Have the user press a key and then have it generate that note on a regular basis (just \'93note on\'94 or \'93note off\'94 as well).\
+\
+Hmm, it certainly seems like the patch is working well enough as it has been written\'85 I think really the next part that needs to be done is to hook up the hardware to it and make sure the mapping works well in a usable way\'85\
+\
+Well there\'92s also the tonality generation part\'85 How to even approach this? Make any note that\'92s selected which is out of key become the next key? Perhaps create different chords to select the tonalities\'85how does the software handle chords\'85? how does midi send the messages? also, with\
+the triple play i believe you can assign each string a channel\'85 perhaps this can be wired in with the\
+triple play controller Dpad thing\'85 Is it even necessary really though\'85 If all the modes consist of the same set of notes, once you\'92re in one key and want to change to a different mode you\'92d just have to alter your thinking a bit\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 04/06/2016\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone Lets get the tonality selection fully working and by that I mean develop a general solution which provides the ability to select any of the tonalities (i.e. major/harmonic minor/melodic minor)\
+\
+I\'92ll be damned there are a lot of modes here to choose from. What\'92s the best way to go about doing this\'85? Providing the option to select any mode will be easy but what other calculations are done based on the currently selected scale? Not too many it seems\'85\
+\
+Well it seems like we have a pretty good start\'85 Now to decide what options to expose to the user\'85\
+\
+What will he want to be able to adjust?\
+\
+- Tonality\
+- Input selection\
+- Fixed duration v.s. dynamic duration\
+- Toggle \'93space\'94 between triggered notes\
+- Change thresholds\
+- Adjust scaling sensitivity\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 04/09/2016\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone What is the best way to design this in Max? Continue with the previous paradigm of creating one presentation mode for the main \'93parent patch\'94 and for each subpath giving it it\'92s own patcher window\'85\
+\
+What would scaling sensitivity be in this situation? It would be how much of an impact adjusting the bend signal has on the resulting control and duration signals\'85come back to this later\
+\
+Right now\'85 why only 3 notes when all 4 would be enabled\'85 also it would be handy to see what chord is being played\'85\
+\
+Tomorrow get the four left toggle switches fully debugged/working/understood and tweak the control\
+signal parameters a bit in preparation for sending a copy over to Ben to get some good feedback. Then spend this week working on a solution to the tonality switching using the method he described.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 04/10/2016\ulnone \
+Man I should really start testing these more \'93unknown\'94 issues and ideas earlier\'85 Beyond having my ideas come up against reality, it\'92s a great way to establish what\'92s feasible and what isn\'92t as well as what\'92s useful/usable and what isn\'92t\'85\
+\
+\ul 04/14/2016\ulnone \
+How to incorporate what Ben was talking about\'85? Will it be easier with 3-note chords? How do you switch between the different mode groups (i.e. major, harmonic minor, melodic minor)\'85? If you use only a certain range of notes, it might get kind of messy keeping track of that on the guitar\'85 what about using the splits feature of the TriplePlay? Does this output the different splits on different channels? I think it might also be possible to get each string on a different MIDI channel\'85 hmm\'85 if we rely on this splits feature too much though it would make it so the device isn\'92t usable with other MIDI instruments\'85. Perhaps both methods\'85? Have a particular channel or a particular set of notes or both\'85? How do other MIDI devices work, is it a common feature to have one that sends data on different channels\'85? Also how do we identify that a chord is coming in\'85? How is that type of a message sent via MIDI? I was under the impression that MIDI is a serial protocol\'85 is there a way where we can keep track of the time distance between the MIDI notes received? Also if each note comes in on a different channel this might be a bit easier\'85\
+\
+Beyond that what about the different mappings of the input notes to changing the modes\'85? The lowest note gets mapped to be the tonal center, that part is obvious. But how do we map the intervals to particular modes\'85? What are the identifying characteristics of each mode?\
+\
+Ionian - M3 and M7\
+Dorian - b3 and natural 6\
+Phrygian - b2\
+Lydian - #4 and 7\
+Mixolydian - b7 and major 3rd\
+Aeolian - b3 and b6\
+Locrian - b2 and b5\
+\
+Poly vs Mono mode setting on the triple play?\
+\
+\ul 04/16/2016\ulnone \
+Before tackling those other problems you can really improve on the patch based on what you read in the book. Things like embedding patches within a patcher and not having to rely on an external file, using local arguments, creating unique identifiers\'85.Go through and see where you can apply these ideas.\
+\
+- Embed anything that\'92s not a \'93real\'94 abstraction into the necessary bpatcher \
+- Rework the NoteOnGenerator to use local variables and arguments\
+\
+Hmmm\'85perhaps it\'92s not such a great idea to go though and remove any of the external patches and\
+add create them as a patcher object within the main patch\'85 especially if some of these have reusable functionality\'85Even if there aren\'92t multiple instances of it within the patch they could still be used by another patch\'85.\
+\
+Hmmm\'85perhaps it\'92s better to change the mappings if you\'92re only operating on pitch increase or decrease to make it so you can go lower than a certain point (or higher depending on the case)\
+\
+\ul 04/18/2016\ulnone \
+Okay\'85 so what do we need here? We need a patch that takes MIDI signals as input and maps these values to different modalities\'85hmmm\'85 Is this changing between them parallel or (i.e. from G major to G minor) or what\'85?\
+\
+I like Ben\'92s idea a lot of using several simple combinations that you can link together to make something more complicated\'85 Let\'92s give this one a whirl and see how it works\'85\
+\
+So if we use one the lower E+A strings to be able to select the root and then tonality that implies we\'92re using POLY mode. How does POLY mode work though? And how will this affect the rest of the system\'85? Are these channel numbers fixed? Is it as simple as a straightforward numbering from 0-5 (or 1-6)\'85? More knowledge of the MIDI protocol might help here as well\'85 It might simplify the chord detection a bit as we know what two channels to look on\'85.\
+\
+But overall we could (man I wish I had some sort of schematic program for this\'85 it would be helpful to map out the functional block diagrams) filter out the notes on the two \'93control\'94 channels and use them to set up the rest of the system\'85then all the other notes could go through as normal\'85hmmm\'85you might even be able to do this on the fly\'85\
+\
+\ul 04/23/2016\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone Hmmm\'85 perhaps it\'92s also time to rethink this structure for generating the MIDI note on and off messages\'85 It might be easier to use a MIDI sequencer to do this. Think of it more as you have a sequence of MIDI notes that you want to regularly cycle through and trigger\'85 You want to be able to manipulate this data set some how (both in terms of the notes it contains as well as the rate of playback)\'85 Look into these MIDI sequencing tutorials in Max\'85 But there might also be another way to do it using other objects to contain the MIDI notes/data\'85. Also there\'92s the \'93makenote\'94 object\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 04/24/2016\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone Hmm\'85 it doesn\'92t look like the \'93seq\'94 object would provide me with what I\'92m looking for. It might be harder to coordinate loading the particular sequences in it as they change. The current way I have the note on/off generation organized might be the most flexible/granular way of achieving this\'85 I\'92m not sure\'85 perhaps revisit this later\'85\
+\
+Hmmm\'85consider using a different channel for each note (which might be required if each string gets it\'92s own channel\'85). We could then implement the fading the Ben asked for initially (2 years ago or so\'85)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 04/25/2016\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone Okay, I\'92ve been able to get the individual strings to come on each of the different channels\'85 it looks like we\'92ll be able to get some work done now\'85\
+\
+CH 1 - e string\
+CH 2 - B string\
+CH 3 - G string\
+CH 4 - D string\
+CH 5 - A string\
+CH 6 - E string\
+\
+So what are we trying to code here? Power chord on the lowest two strings initiates tonality selection/key selection mode. If they only play a power chord then merely reassign the root, if they play one of the other interval combinations then change the tonality as well\'85 This also leaves the ability to change to a parallel tonality relatively easy\'85. I think we can model this with a state machine\'85 hmm godammit\'85 I should have gotten some software for modeling and developing these ideas better\'85\
+\
+\
+Wait State - change tonalities if \'85.\
+\
+Hmm\'85 might even be as simple as \
+- power chord =  change root\
+- unique interval combination = change to corresponding tonality\
+\
+The program isn\'92t going to be in the other \'93states\'94 for an extended period of time really\'85 well as far as I can tell at the moment\'85 once we get some testing done things could change\'85\
+\
+Ionian - play the 1 and 3 - M3\
+Dorian - play the 1 and 6 - M6\
+Phrygian - play the 1 and b2 - m2\
+Lydian - play the 1 and #4 - A4\
+Mixolydian - play the 3 and the b7 - D5\
+Aeolian - play the 1 and b3 - m3\
+Locrian - play the b3 and b5 - m3\
+\
+For now lets assume that even though the MIDI protocol is serial we can effectively treat each channel as coming in in parallel. So basically what we do is check the distance between the notes on each channel and their relationship to the root\'85.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul 04/27/2016\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone So how do we go about this processing? Just check the streams and when there a note that comes in on each channel\'92s stream we check the interval between the two notes to figure out what to do? What if a note only comes in on one stream? do we care about note off\'92s here? do we care about the velocity\'85? is there a way to reset the values after a certain period of time? presumably a note off comes in afterwards\'85 is this guaranteed though\'85? does the triple play software automatically send an off? hmm\'85 some more testing might be necessary\'85\
+\
+\
+stream a		|		stream b\
+	note on	|\
+			|		note on\
+	note on	|\
+\
+hmmm.. our good friend mr timing diagram would be extremely useful here\'85.\
+is there a way where we can enforce only one note being active on the channel at a time? i think makenote might provide this functionality\'85\
+\
+we could strip all the notes at first and then feed them into a makenote\'85 but then what happens? we need some variable to keep track of the active note on the channel and then only when both channels have an active note we do a comparison to see the interval between them and make the necessary change (to either the root or the currently selected tonality)\
+\
+hmmm\'85 the borax object seems like a good candidate to achieve this\'85let\'92s investigate\'85 also poly looks like it could be useful\'85poly could be used to enforce a one note per channel constraint\
+\
+hmmm\'85 how do we coordinate it so that the subtraction is done correctly\'85have a counter to keep track of when the variables are set and output a bang to trigger both the calculations\
+\
+hmmm\'85 how do we perform this calculation\'85? it looks like we have two scenarios of concern here\
+\
+1. if the E string is active (left inlet of - object) when the A string value comes (right inlet of - object) in we need a way to trigger the calculation\
+2. if the A string is active when the E string comes in then everything is copacetic (as the right operand in the subtraction operation will already be set), also the E string shouldn\'92t necessarily trigger the calculation immediately\
+\
+What if we had both scenarios worked out (using the r-minus as well)? Then we need a way to determine which of the two final calculations to use in which case we\'92d need to figure out which channel was activated first. We have another solution using other objects\'85\
+\
+Now we need to determine what action to take based on the interval played as well as the scale degrees of the notes (in reality we only need the scale degree from the E string)\'85 This also means we need the current root note\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs48 \cf0 \ul 04/28/2016
+\fs24 \ulnone \
+Intervallic distances of interest in half steps:\
+\
+m2 = 1\
+m3 = 3\
+M3 = 4\
+A4/D5 = 6\
+P5 = 7\
+M6 = 9\
+\
+How do we compare the incoming note to the root? The root itself as a variable exists outside of this patch, most likely living in a  parent patch\'85 use send/receive objects? use patter? use inlets/outlets?\
+perhaps the most modular way would be to have an inlet for the root and then have an output sending a message saying if root should be changed\'85 that way we keep the root only stored in one place and don\'92t have to worry about coordinating updates to the variable\'85\
+\
+also, how can we modularize this patch more so? for instance could we make the channel numbers arguments? also, how do we make it so you can select the MIDI device without having to go into the patch (i.e. just by double clicking on it, like with the other MIDI objects\'85 or make the input something that can be passed through an inlet)\'85.\
+\
+how do we establish which scale degree is being played on the 6th string? also how do we establish that we\'92re playing something out of key? hmm.. perhaps I\'92m not putting this functionality in the correct place\'85. well hold on a sec\'85 it looks like we\'92ll have to rewrite some of the \'93tonality\'94 engine to an extent\'85 currently it has the ability to set the root\'85 in reality though it will only need to listen to channels 1-4 and establish which chord tones to generate\'85 channels 5-6 will be used to establish the keys and change the tonality\'85\
+\
+Hmm\'85 what\'92s the point in creating diagrams to indicate the architecture when if the abstractions are done properly in Max/MSP it should be evident\'85 it will probably be easier to get my ideas down on paper first and then translate them into Max/MSP \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\i\fs36 \cf0 Tonality and Root Decisions
+\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\i0 \cf0 What information do we have?\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	1.	}Root note\
+{\listtext	2.	}Note on CH 6\
+{\listtext	3.	}Note on CH 5\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+From there we can calculate the distances between the notes on CH6 and CH5 as well as the distance between the Root and the note on CH 6 which should provide us with all the information we need to know in order to change roots or change tonalities\
+\
+What does the number that we\'92re currently calculating actually represent/what are we actually doing? By performing the mod12 operation we\'92re remapping the numbers on the range 0 to 11. This gives them an absolute position in an ordering if we treat the numbers as indexes. By taking the difference between the two positions we get the distance between them (corresponding to a musical interval) and then by taking the absolute value it makes it easier for decision purposes. Is that really what we want though? We need to know if the note on the low E string is a minor third above the root or not. I don\'92t believe we can robustly establish that from this process.\
+\
+If note == root\
+	check for valid interval\
+else if note == b3\
+	check for valid interval\
+else check if P5\
+	set new root\
+\
+how do we enforce these calculation orders? hmm it seems we might have a larger coordination issue at hand in terms of calculating the E strings relationship to the root note based on the when the A data comes in\'85\
+\
+Lets define the operation of calculations in the following manner:\
+\
+1. Calculate the distance between the two notes on each input channel\
+2. Then calculate the root notes relationship to the input on the E string\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs48 \cf0 \ul 04/29/2016\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \ulnone How to test this? It looks like it might be easier to use the pattr/autopattr/present options to setup the various parameters for the different resting scenarios\'85 speaking of which, what are the testing scenarios\'85? There\'92s the timing/message arrival mainly as well as the tonal/root changing functionality\'85 It seems to be easiest to test the tonal/root changing features first so lets get that done.\
+\
+What are the tonality scenarios to test? Send the various note combinations (relative to the current root) to make sure that the proper modes are output or the root has been changed\'85 It looks like I have the root/tonality decisions properly tested. Now onto the timing\'85\
+\
+What are the timing scenarios to test? We\'92re testing what happens when the different strings come in at different times\'85 We need a way to make one event occur before another\'85 use a delay for each note and then adjust the corresponding delay times\'85. Seems to be working but we\'92re also getting that double output issue\'85. What\'92s the deal\'85?\
+\
+What would cause two outputs to be triggered? This would occur when two calculations are triggered\'85Hmmm.. Lets see what happens when we only send one note at a time\'85 Nothing (as was expected\'85). Also when we tie the bangs together it also only sends one message as output\'85 It must be connected to the delay blocks somehow\'85\
+\
+Hmmm\'85 I\'92m beginning to think this extra makenote within the patch is a bit of overkill and is causing more trouble than it\'92s worth at the moment\'85 take it out for now and see what actually happens in testing\'85\
+\
+It more seemed to be a problem relating to the length of time the notes appeared \'93active\'94 on each string\'85. Oh well I think the feature might have make things more difficult anyways\'85\
+\
+Hahaha, the testing was totally worth it! I\'92ve narrowed down the case to only being when the A string note comes in after the E string (which is probably the most common case). Why would this cause another output of the mode? Something is causing another bang to be sent to the \'93pv interval\'94\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs48 \cf0 \ul 04/30/2016\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \ulnone What to do now\'85? I\'92m fairly confident in the object now that I don\'92t feel the need to test it with the TriplePlay at the moment. The entire note generation algorithm can be reworked to be a hell of a lot cleaner with all the new things I know\'85 That will have to wait a bit at the moment though\'85 How am  going to integrate this new tonality controller into the rest of the system\'85\
+\
+I think the easiest way will be to separate the input into 3 different streams which get routed throughout the system. In this case:\
+\
+1. E string data - notein object\
+2. A string data - notein object\
+3. D-e string data - midiparse object\
+\
+Add a filter to only get the note data (for the time being) as this should reduce the overall computational load on the entire system by removing those from the MIDI streams as early as possible.\
+\
+Hmmm\'85 How are we going to handle the channel aspect here? It might be easier to have a dedicated MIDI port to be the output for the arpeggiator and we could assign each voice it\'92s own channel (this would provide the most flexibility as you could have various sounds going on at once, as well as implement the volume control that Ben had initially asked for)\'85 What are we even doing to begin with for the channels? As far as input is concerned we only consider the different channels to determine what exactly to do with the data\'85 when we output MIDI note messages the channel might be something completely different than what the input was\'85 hmmm\'85 but what if we took that information into consideration\'85 it would allow us to have each string be a different sound\'85 it might be easier to provide some sort of option for this to allow the user to select whether or not to reassign the MIDI channels\'85come back to this idea later\'85\
+\
+For now map everything to one channel and then we should be good\'85 this can be reworked later\'85\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs48 \cf0 \ul 05/01/2016
+\fs24 \ulnone \
+Okay\'85 now it\'92s time to rework the bulk of the rest of the system\'85 this is mainly the mechanism by which the note on/off pairs are sent as well as how the NoteOnGenerators synchronize with the rest of the system\'85 as well as providing channel remapping (which also adds the ability to make the volume swells Ben originally requested\'85)\
+\
+What is the sequence of events that needs to occur here?\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	1.	}A note comes in which is analyzed by:\
+\pard\tx940\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls2\ilvl1\cf0 {\listtext	a.	}First: the tonality engine to establish\
+\pard\tx1660\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls2\ilvl2\cf0 {\listtext	i.	}If the note should be acknowledged or not\
+{\listtext	ii.	}If it should be acknowledged then establish the corresponding offsets to be added to generate the arpeggio notes\
+\pard\tx940\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls2\ilvl1\cf0 {\listtext	b.	}Second: the NoteOn generators in order to extract the note/velocity (and channel?)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+How do we make it so that a note not in the scale doesn\'92t trigger the arpeggios? Actually more generally\'85 how do we start and stop the arpeggiation? Before even reaching the poly object we should do some sort of analysis to establish if the incoming note is within the key or not.. We should have some sort of an object to do this as we need the basic functionality in a couple of places\'85\
+\
+I need to drastically rethink this note triggering scheme\'85 it is truly a clusterfuck at the moment\'85\
+How to go about this\'85?\
+\
+The NoteOn generators shouldn\'92t have to deal with any sort of timing or anything\'85 they should be as stupid as possible and give output after they receive a bang\'85 So how does this work then\'85? We have several NoteOn generators (one for each note of the arpeggio) which receive bangs from something else that coordinates when to trigger which note\'85 what about the note off messages\'85? who controls those\'85? Is there a makenote object that will do this\'85? How do we control the \'93spacing\'94 between the notes if one of the notes is deactivated\'85? I think that will more be something which is controlled by the router as well as the \'93bang generator\'94\'85\
+\
+Okay\'85 so now that we\'92ve got the note offsets all setup and ready to be sent if need be, what do we do next\'85? tell the bang generator to start generating bangs\'85. Okay\'85 what are we going to do here? We can use the tempo object to generate bangs on a regular basis to feed the counter\'85\
+\
+Okay, looks like we\'92ve got another synchronization problem here\'85 What\'92s the order we want to do this?\
+\
+1. Check to see if the incoming note is within the current scale\
+2. Check to see if we can play the note (i.e. poly is currently inactive)\
+3. If we can then set it as the current\
+\
+Solved!\
+\
+Now what to do? We have something to generate the note-on messages on a regular basis\'85 what about the note off messages now?Also how do we control their duration is a usable/musical way? We\'92d effectively be controlling the makenote  duration parameter.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs48 \cf0 \ul 05/02/2016\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \ulnone Okay\'85 so what do we do now in terms of the note off management\'85? To be honest I\'92m pretty sick of this project at the moment as there are a lot of other things I\'92d rather be doing\'85 Lets just get it so it generates 16th notes at a regular interval and tie the tempo of this to the bend signal\'85 Then we can test the overall program and research time in Max more thoroughly\'85\
+\
+What is a good way to trap this bug? What we\'92re looking for is a note mix-up within the parsing? Hmm\'85 well it would probably be a good idea to figure out what those other messages mean. Also I\'92m not sure I see why there\'92s any connection between hitting the kill switch and causing bytes to get out of order in the parsing\'85 that is truly an odd connection\'85but back to the original issue\'85 how do we capture this bug\'85? What\'92s the problem? We have all the MIDI data coming in on all channels from that object and we want to isolate it only to channels 1-4 (in reality we could isolate that further as we know what guitar string we\'92re using to generate the note) as well as to only note on messages\'85 hmm\'85 it would still be a good idea to see if there\'92s some sort of MIDI protocol analyzer out there where you could give it a log of MIDI data and it would tell you what the messages actually mean\'85 from there you could deduce what\'92s going on more and have a much better idea of what\'92s going on in the larger picture\'85\
+	}

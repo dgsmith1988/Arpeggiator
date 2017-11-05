@@ -1,0 +1,84 @@
+{
+	"pattrstorage" : 	{
+		"name" : "arpeggio",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"DynamicToggle" : [ 0 ],
+					"SpaceToggle" : [ 0 ],
+					"SustainToggle" : [ 0 ],
+					"TailsToggle" : [ 0 ],
+					"ControlSignalScaling::Duration_Direction" : [ 0 ],
+					"ControlSignalScaling::Duration_LowerBound" : [ 0 ],
+					"ControlSignalScaling::Duration_ManualControl" : [ 0 ],
+					"ControlSignalScaling::Duration_Slider" : [ 1000.0 ],
+					"ControlSignalScaling::Duration_UpperBound" : [ 1000 ],
+					"ControlSignalScaling::Trigger_Direction" : [ 0 ],
+					"ControlSignalScaling::Trigger_Invert" : [ 0 ],
+					"ControlSignalScaling::Trigger_ManualControl" : [ 0 ],
+					"ControlSignalScaling::Trigger_Slider" : [ 1000.0 ],
+					"NoteGenerationAndRouting::Note1Threshold" : [ 0 ],
+					"NoteGenerationAndRouting::Note2Threshold" : [ 250 ],
+					"NoteGenerationAndRouting::Note3Threshold" : [ 500 ],
+					"NoteGenerationAndRouting::Note4Threshold" : [ 750 ],
+					"NoteGenerationAndRouting::Modality::SelectedScale" : [ 0 ]
+				}
+
+			}
+,
+			"2" : 			{
+				"id" : 2,
+				"data" : 				{
+					"DynamicToggle" : [ 1 ],
+					"SpaceToggle" : [ 0 ],
+					"SustainToggle" : [ 1 ],
+					"TailsToggle" : [ 1 ],
+					"ControlSignalScaling::Duration_Direction" : [ 0 ],
+					"ControlSignalScaling::Duration_LowerBound" : [ 0 ],
+					"ControlSignalScaling::Duration_ManualControl" : [ 0 ],
+					"ControlSignalScaling::Duration_Slider" : [ 654.67627 ],
+					"ControlSignalScaling::Duration_UpperBound" : [ 1000 ],
+					"ControlSignalScaling::Trigger_Direction" : [ 2 ],
+					"ControlSignalScaling::Trigger_Invert" : [ 0 ],
+					"ControlSignalScaling::Trigger_ManualControl" : [ 0 ],
+					"ControlSignalScaling::Trigger_Slider" : [ 500.0 ],
+					"NoteGenerationAndRouting::Note1Threshold" : [ 0 ],
+					"NoteGenerationAndRouting::Note2Threshold" : [ 250 ],
+					"NoteGenerationAndRouting::Note3Threshold" : [ 500 ],
+					"NoteGenerationAndRouting::Note4Threshold" : [ 750 ],
+					"NoteGenerationAndRouting::Modality::SelectedScale" : [ 4 ]
+				}
+
+			}
+,
+			"3" : 			{
+				"id" : 3,
+				"data" : 				{
+					"DynamicToggle" : [ 0 ],
+					"SpaceToggle" : [ 0 ],
+					"SustainToggle" : [ 0 ],
+					"TailsToggle" : [ 0 ],
+					"ControlSignalScaling::Duration_Direction" : [ 0 ],
+					"ControlSignalScaling::Duration_LowerBound" : [ 0 ],
+					"ControlSignalScaling::Duration_ManualControl" : [ 0 ],
+					"ControlSignalScaling::Duration_Slider" : [ 654.67627 ],
+					"ControlSignalScaling::Duration_UpperBound" : [ 1000 ],
+					"ControlSignalScaling::Trigger_Direction" : [ 2 ],
+					"ControlSignalScaling::Trigger_Invert" : [ 0 ],
+					"ControlSignalScaling::Trigger_ManualControl" : [ 1 ],
+					"ControlSignalScaling::Trigger_Slider" : [ 122.302155 ],
+					"NoteGenerationAndRouting::Note1Threshold" : [ 0 ],
+					"NoteGenerationAndRouting::Note2Threshold" : [ 250 ],
+					"NoteGenerationAndRouting::Note3Threshold" : [ 500 ],
+					"NoteGenerationAndRouting::Note4Threshold" : [ 750 ],
+					"NoteGenerationAndRouting::Modality::SelectedScale" : [ 0 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}
