@@ -3,6 +3,8 @@ This project is an arpeggiator in Max/MSP developed in collaboration with guitar
 
 The latest code version can be found: Arpeggiator/Advanced Arpeggiator/v0.5/
 
-The idea behind the project was to an arpeggio and map its various parameters to the bend signal provided by the MIDI pick-up. For instance you could change the rate of arpeggiation, the voicing of the arpeggio, the notes enabled in the arpeggio, etc... It's configured to use the lowest two strings (MIDI channels 5 and 6) to select the root as well as tonality (limited only to the major scale modes at the moment). For example to set the key to G Major you would play a major third across the E and A strings starting on the 3rd fret. To go to C Dorian you would play a major sixth on the 8th fret of the E string and 12th fret of the A string. Each of the different modes uses an interval corresponding the the unique tone that differentiates it from the other modes (see RootAndTonalityController.maxpat for more info)
+The idea behind the project was to an arpeggio and map its various parameters to the bend signal provided by the MIDI pick-up. For instance you could change the rate of arpeggiation, the voicing of the arpeggio, the notes enabled in the arpeggio, etc. More info about how to use it can be found in the patch itself.
 
 From a technical standpoint the project was a success but the results turned out to be less musical than hoped for. It did however provide a chance to explore the interesting territory of how to represent tonality on a computer.
+
+The patch was originally written in Max 6 and hasn't been tested with Max 7 yet.
