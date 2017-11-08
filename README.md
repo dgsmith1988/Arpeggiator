@@ -8,3 +8,5 @@ The idea behind the project was to an arpeggio and map its various parameters to
 From a technical standpoint the project was a success but the results turned out to be less musical than hoped for. It did however provide a chance to explore the interesting territory of how to represent tonality on a computer.
 
 The patch was originally written in Max 6 and hasn't been tested with Max 7 yet.
+
+There is a dependency on VJ Manzo's Modal Object Library. http://www.vjmanzo.com/mol/
