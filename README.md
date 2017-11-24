@@ -3,7 +3,7 @@ This project is an arpeggiator in Max/MSP developed in collaboration with guitar
 
 The latest code version can be found: Arpeggiator/Advanced Arpeggiator/v0.5/
 
-The idea behind the project was to take the idea of an arpeggio and map control of its parameters to the bend signal provided by the MIDI pick-up. For instance you could change the rate of arpeggiation, the voicing of the arpeggio, the notes enabled in the arpeggio, or the direction of arpeggiation through bending the string. More info about how to use it can be found in the patch itself.
+The idea behind the project was to take the idea of an arpeggio and map control of its parameters to the bend signal provided by the MIDI pick-up. For instance you could change the rate of arpeggiation, the voicing of the arpeggio, the notes enabled in the arpeggio, or the direction of arpeggiation through bending the string (or using a whammy-bar). More info about how to use it can be found in the patch itself.
 
 From a technical standpoint the project was a success but the results turned out to be less musical than hoped for. It did however provide a chance to explore the interesting territory of how to represent tonality on a computer.
 
